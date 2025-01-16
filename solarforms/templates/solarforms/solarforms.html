@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียน SAKOL SOLAR</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #15334f;
+            --secondary-color: #a61e1c;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: "Kanit", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            background-image: url('https://firebasestorage.googleapis.com/v0/b/imagesss-7501d.appspot.com/o/solar-panel-bg.jpg?alt=media&token=your-token');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #e10717;
+            border-color: #e10717;
+        }
+
+        .btn-success {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-success:hover {
+            background-color: #1c4366;
+            border-color: #1c4366;
+        }
+
+        .table {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table-dark {
+            background-color: var(--primary-color);
+        }
+
+        .footer {
+            background-color: rgba(21, 51, 79, 0.95);
+            color: var(--text-color);
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: var(--text-color);
+        }
+
+        .footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-copyright {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* สไตล์สำหรับฟอร์ม */
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(21, 51, 79, 0.25);
+        }
+
+        /* สไตล์สำหรับส่วนหัว */
+        .brand-logo {
+            max-height: 80px;
+            filter: brightness(0) invert(1);
+        }
+
+        /* สไตล์สำหรับ partner logos */
+        .partner-logos {
+            background-color: rgba(255, 255, 255, 0.781);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .partner-logos img {
+            height: 40px;
+            margin: 10px;
+            filter: hue-rotate(0%);
+            transition: filter 0.3s;
+        }
+
+        .partner-logos img:hover {
+            filter: hue-rotate(100%);
+        }
+        a {
+            text-decoration: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        {% if user.is_staff %}
+        <!-- ส่วนของแอดมิน -->
+        <div class="admin-section mb-5">
+            <h2 class="text-center mb-4">ข้อมูลผู้ลงทะเบียนทั้งหมด</h2>
+            
+            <div class="mb-3">
+                <a href="{% url 'export_excel' %}" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> ดาวน์โหลด Excel
+                </a>
+                <a href="/admin/" class="btn btn-success">
+                    <i class="fas fa-tasks"></i> จัดการข้อมูลทั้งหมด
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ชื่อสถานที่</th>
+                            <th>ชื่อผู้ติดต่อ</th>
+                            <th>เบอร์โทรศัพท์</th>
+                            <th>เวลาที่สะดวกให้ติดต่อ</th>
+                            <th>วันที่สะดวกให้สำรวจ</th>
+                            <th>ค่าไฟฟ้า/เดือน</th>
+                            <th>ข้อมูลเพิ่มเติม</th>
+                            <th>วันที่ลงทะเบียน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in solar_data %}
+                        <tr>
+                            <td>{{ data.location_name|default:"-" }}</td>
+                            <td>{{ data.contact_name|default:"-" }}</td>
+                            <td>{{ data.phone_number|default:"-" }}</td>
+                            <td>{{ data.preferred_contact_time|time:"H:i"|default:"-" }}</td>
+                            <td>{{ data.preferred_survey_date|date:"d/m/Y"|default:"-" }}</td>
+                            <td>{{ data.latest_electric_bill|default:"-" }}</td>
+                            <td>{{ data.additional_info|default:"-" }}</td>
+                            <td>{{ data.created_at|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr class="my-5">
+        {% endif %}
+
+        <!-- ส่วนของผู้ใช้งาน -->
+        <div class="user-section">
+            <h1 class="text-center mb-4">ลงทะเบียนรับสิทธิ์กับ <img src="https://firebasestorage.googleapis.com/v0/b/imagesss-7501d.appspot.com/o/White-SAKOLSOLAR-final.png?alt=media&token=033ad799-b552-4b16-aeee-a5c51e1ab321" alt="logo-sakol-solar" style="height: 90px; vertical-align: middle;"></h1>
+            
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}" class="form-label">
+                                        {{ field.label }}
+                                        {% if field.field.required %}
+                                            <span class="text-danger">*</span>
+                                        {% endif %}
+                                    </label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ field.errors }}
+                                    </div>
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                    <div class="form-text">{{ field.help_text }}</div>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary px-5">
+                                        <!--<i class="fas fa-save"></i>--> บันทึกข้อมูลของคุณ
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container"></div>
+            <div class="partner-logos text-center">
+                <h4 class="text-dark mb-4">ขอบคุณลูกค้าที่ให้ความไว้วางใจ</h4>
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <a href="https://www.lh.co.th/th"><img src="https://www.lh.co.th/_next/image?url=%2Fimages%2Ffooter%2FLH-logo.webp&w=256&q=75" alt="Solis"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://www.solisinverters.com/th?gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHxiS0Wd3Jr7BdlhU4KRmqgIzdXJIdawUozXyop_dXt1l5bU1pD5ohQaAoKSEALw_wcB"><img src="https://cmsdata.solisinverters.com/uploads/image/5bdc25d94070b.png" alt="Solis"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://www.osdasol.com/?fbclid=IwY2xjawH0SCFleHRuA2FlbQIxMAABHZEopgKOJ6-viycODNDbqWenkCMPEcoGz4elA43x_ARbB9P3dD-HYpX75w_aem_SLsypgYPgrJ1Gw3bsptwYQ"><img src="https://www.osdasol.com/public/upload/20220831/445f757a0a45f1be81c1236c64a64f99.png" alt="SDA"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://www.scg.com/"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Siam_Cement_Group_Logo.svg/330px-Siam_Cement_Group_Logo.svg.png" alt="SCG"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://en.chint.com/"><img src="https://cdn.asp.events/CLIENT_CL_EE_E92EC48A_9F42_8E1E_7106D5CAFEEF513B/sites/Enlit-Europe-2022/media/libraries/exhibitors/7c693b71-b718-11ec-910306e21988b83f-logo.png" alt="CHNT"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://www.sakolgroup.com/KJL/65239b5994691c001a1503e2"><img src="https://www.kjl.co.th/assets/images/logo-text.png" alt="KJL"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://www.sakolgroup.com/KJL/65239b5994691c001a1503e2"><img src="https://green-energy.by/upload/iblock/31a/logo.png" alt="SEEO"></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://www.sakolgroup.com/PLUS_Und_THREE/6523aaa0ce1df20019a6a568"><img src="https://firebasestorage.googleapis.com/v0/b/imagesss-7501d.appspot.com/o/image-removebg-preview.png?alt=media&token=99fad6b2-4ed1-4a91-9163-8a01b0bc5705" alt="PLUS THREE" style="height: 64px; vertical-align: middle;"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row py-4">
+                <!-- คอลัมน์ที่ 1: เกี่ยวกับเรา -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">กลุ่มบริษัทสากล SAKOL GROUP</h5>
+                    <p class="text-muted">
+                        "สากล" ก้าวสู่ความเป็นกลุ่มบริษัทผู้ให้บริการด้านระบบไฟฟ้า
+                        ที่ได้รับความไว้วางใจจากลูกค้า ร้านค้า และกลุ่มผู้ใช้งาน
+                        โครงการอย่างกว้างขวางในปัจจุบัน
+                    </p>
+                </div>
+
+                <!-- คอลัมน์ที่ 2: ติดต่อเรา -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">ติดต่อสอบถาม</h5>
+                    <p class="mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        1296/97-99 ถนนกรุงเทพฯ-นนทบุรี แขวงบางชื่อ เขตบางซื่อ กรุงเทพมหานคร 10800
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-phone me-2"></i>
+                        <a href="tel:0291129708" class="text-decoration-none">02-911-2970-8</a>
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-envelope me-2"></i>
+                        <a href="mailto:marketing@sakolgroup.com" class="text-decoration-none">marketing@sakolgroup.com</a>
+                    </p>
+                </div>
+
+                <!-- คอลัมน์ที่ 3: Social Media -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">ติดตามเรา</h5>
+                        <p class="mb-2">
+                            <a href="https://www.facebook.com/sakolgroup" target="_blank" class="me-2">
+                                <i class="fab fa-facebook me-2"></i>
+                                Facebook
+                            </a>
+                        </p>
+                        <p class="mb-2">
+                            <a href="https://page.line.me/?accountId=ueu8363p" target="_blank" class="me-2">
+                                <i class="fab fa-line me-2"></i>
+                                LINE
+                            </a>
+                        </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="footer-copyright py-3">
+            <div class="container text-center">
+                <small>© Copyright 2023 www.sakolgroup.com all rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+</body>
+</html>
