@@ -135,7 +135,7 @@
         <!-- ส่วนของแอดมิน -->
         <div class="admin-section mb-5">
             <h2 class="text-center mb-4">ข้อมูลผู้ลงทะเบียนทั้งหมด</h2>
-            
+
             <div class="mb-3">
                 <a href="{% url 'export_excel' %}" class="btn btn-success">
                     <i class="fas fa-file-excel"></i> ดาวน์โหลด Excel
@@ -152,10 +152,10 @@
                             <th>ชื่อสถานที่</th>
                             <th>ชื่อผู้ติดต่อ</th>
                             <th>เบอร์โทรศัพท์</th>
-                            <th>เวลาที่สะดวกให้ติดต่อ</th>
-                            <th>วันที่สะดวกให้สำรวจ</th>
+                            <th>ช่วงเวลาที่สะดวกในการติดตั้ง</th>
+                            <th>วันที่สะดวกในการสำรวจหน้างาน</th>
                             <th>ค่าไฟฟ้า/เดือน</th>
-                            <th>ข้อมูลเพิ่มเติม</th>
+                            <th>ข้อมูลที่อยากระบุเพิ่มเติม</th>
                             <th>วันที่ลงทะเบียน</th>
                         </tr>
                     </thead>
@@ -182,7 +182,7 @@
         <!-- ส่วนของผู้ใช้งาน -->
         <div class="user-section">
             <h1 class="text-center mb-4">ลงทะเบียนรับสิทธิ์กับ <img src="https://firebasestorage.googleapis.com/v0/b/imagesss-7501d.appspot.com/o/White-SAKOLSOLAR-final.png?alt=media&token=033ad799-b552-4b16-aeee-a5c51e1ab321" alt="logo-sakol-solar" style="height: 90px; vertical-align: middle;"></h1>
-            
+
             {% if messages %}
             <div class="messages">
                 {% for message in messages %}
@@ -237,7 +237,7 @@
                 <h4 class="text-dark mb-4">ขอบคุณลูกค้าที่ให้ความไว้วางใจ</h4>
                 <div class="row align-items-center justify-content-center">
                     <div class="col-auto">
-                        <a href="https://www.lh.co.th/th"><img src="https://www.lh.co.th/_next/image?url=%2Fimages%2Ffooter%2FLH-logo.webp&w=256&q=75" alt="Solis"></a>
+                        <a href="https://www.sakolgroup.com/PLUS_Und_THREE/6523aaa0ce1df20019a6a568"><img src="https://firebasestorage.googleapis.com/v0/b/imagesss-7501d.appspot.com/o/image-removebg-preview.png?alt=media&token=99fad6b2-4ed1-4a91-9163-8a01b0bc5705" alt="PLUS THREE" style="height: 120px; vertical-align: middle;"></a>
                     </div>
                     <div class="col-auto">
                         <a href="https://www.solisinverters.com/th?gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHxiS0Wd3Jr7BdlhU4KRmqgIzdXJIdawUozXyop_dXt1l5bU1pD5ohQaAoKSEALw_wcB"><img src="https://cmsdata.solisinverters.com/uploads/image/5bdc25d94070b.png" alt="Solis"></a>
@@ -249,17 +249,12 @@
                         <a href="https://www.scg.com/"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Siam_Cement_Group_Logo.svg/330px-Siam_Cement_Group_Logo.svg.png" alt="SCG"></a>
                     </div>
                     <div class="col-auto">
-                        <a href="https://en.chint.com/"><img src="https://cdn.asp.events/CLIENT_CL_EE_E92EC48A_9F42_8E1E_7106D5CAFEEF513B/sites/Enlit-Europe-2022/media/libraries/exhibitors/7c693b71-b718-11ec-910306e21988b83f-logo.png" alt="CHNT"></a>
-                    </div>
-                    <div class="col-auto">
                         <a href="https://www.sakolgroup.com/KJL/65239b5994691c001a1503e2"><img src="https://www.kjl.co.th/assets/images/logo-text.png" alt="KJL"></a>
                     </div>
                     <div class="col-auto">
                         <a href="https://www.sakolgroup.com/KJL/65239b5994691c001a1503e2"><img src="https://green-energy.by/upload/iblock/31a/logo.png" alt="SEEO"></a>
                     </div>
-                    <div class="col-auto">
-                        <a href="https://www.sakolgroup.com/PLUS_Und_THREE/6523aaa0ce1df20019a6a568"><img src="https://firebasestorage.googleapis.com/v0/b/imagesss-7501d.appspot.com/o/image-removebg-preview.png?alt=media&token=99fad6b2-4ed1-4a91-9163-8a01b0bc5705" alt="PLUS THREE" style="height: 64px; vertical-align: middle;"></a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -299,7 +294,7 @@
                 <div class="col-md-4 mb-4">
                     <h5 class="mb-3">ติดตามเรา</h5>
                         <p class="mb-2">
-                            <a href="https://www.facebook.com/sakolgroup" target="_blank" class="me-2">
+                            <a href="https://www.facebook.com/sakolsolar/" target="_blank" class="me-2">
                                 <i class="fab fa-facebook me-2"></i>
                                 Facebook
                             </a>
@@ -313,7 +308,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Copyright -->
         <div class="footer-copyright py-3">
             <div class="container text-center">
@@ -327,6 +322,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    
+
 </body>
 </html>
