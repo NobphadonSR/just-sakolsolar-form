@@ -8,7 +8,7 @@ class SolarDataForms(forms.ModelForm):
             'type': 'time'
         }),
         required=False,
-        label='เวลาที่สะดวกให้ติดต่อ'
+        label='ช่วงเวลาที่สะดวกในการติดตั้ง'
     )
     
     preferred_survey_date = forms.DateField(
@@ -17,7 +17,7 @@ class SolarDataForms(forms.ModelForm):
             'type': 'date'
         }),
         required=False,
-        label='วันที่สะดวกให้สำรวจหน้างาน'
+        label='วันที่สะดวกในการสำรวจหน้างาน'
     )
 
     class Meta:

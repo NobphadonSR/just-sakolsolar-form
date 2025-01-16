@@ -39,10 +39,10 @@ def export_excel(request):
             'ชื่อสถานที่': data.location_name,
             'ชื่อผู้ติดต่อ': data.contact_name,
             'เบอร์โทรศัพท์': data.phone_number,
-            'วันที่สะดวกให้ติดต่อ': data.preferred_contact_date,
-            'วันที่สะดวกให้สำรวจ': data.preferred_survey_date,
+            'ช่วงเวลาที่สะดวกในการติดตั้ง': data.preferred_contact_date,
+            'วันที่สะดวกในการสำรวจหน้างาน': data.preferred_survey_date,
             'ค่าไฟฟ้าเดือนล่าสุด': data.latest_electric_bill,
-            'ข้อมูลเพิ่มเติม': data.additional_info,
+            'ข้อมูลที่อยากระบุเพิ่มเติม': data.additional_info,
             'วันที่ลงทะเบียน': timezone.localtime(data.created_at).replace(tzinfo=None)
         }
         data_list.append(data_dict)
